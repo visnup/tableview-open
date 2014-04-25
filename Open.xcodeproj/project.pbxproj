@@ -25,6 +25,7 @@
 		852483CD190993F200E6D02D /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 852483A8190993F200E6D02D /* CoreData.framework */; };
 		852483D5190993F200E6D02D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 852483D3190993F200E6D02D /* InfoPlist.strings */; };
 		852483D7190993F200E6D02D /* OpenTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 852483D6190993F200E6D02D /* OpenTests.m */; };
+		852483E21909D9A000E6D02D /* PageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 852483E11909D9A000E6D02D /* PageViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,8 @@
 		852483D2190993F200E6D02D /* OpenTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "OpenTests-Info.plist"; sourceTree = "<group>"; };
 		852483D4190993F200E6D02D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		852483D6190993F200E6D02D /* OpenTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OpenTests.m; sourceTree = "<group>"; };
+		852483E01909D9A000E6D02D /* PageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PageViewController.h; sourceTree = "<group>"; };
+		852483E11909D9A000E6D02D /* PageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PageViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +131,8 @@
 				852483B6190993F200E6D02D /* Main.storyboard */,
 				852483BC190993F200E6D02D /* MasterViewController.h */,
 				852483BD190993F200E6D02D /* MasterViewController.m */,
+				852483E01909D9A000E6D02D /* PageViewController.h */,
+				852483E11909D9A000E6D02D /* PageViewController.m */,
 				852483BF190993F200E6D02D /* DetailViewController.h */,
 				852483C0190993F200E6D02D /* DetailViewController.m */,
 				852483C2190993F200E6D02D /* Images.xcassets */,
@@ -271,6 +276,7 @@
 				852483B5190993F200E6D02D /* AppDelegate.m in Sources */,
 				852483B1190993F200E6D02D /* main.m in Sources */,
 				852483BB190993F200E6D02D /* Open.xcdatamodeld in Sources */,
+				852483E21909D9A000E6D02D /* PageViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

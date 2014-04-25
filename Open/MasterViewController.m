@@ -11,9 +11,11 @@
 
 @interface MasterViewController ()
 
-@property NSIndexPath *animatingIndexPath;
+@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 
-- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
+@property NSIndexPath *selectedIndexPath;
+
+- (IBAction)insertNewObject:(id)sender;
 
 @end
 
@@ -30,37 +32,52 @@
 
 - (void)animateTransition:(id<UIViewControllerContextTransitioning>)transitionContext
 {
-  UIViewController *toVC = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
+  UIViewController *fromVC = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey],
+                   *toVC = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
 
   UIView *containerView = [transitionContext containerView],
          *toView = toVC.view;
 
-  self.animatingIndexPath = [self.tableView indexPathForSelectedRow];
-  UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:self.animatingIndexPath];
+  NSTimeInterval duration = [self transitionDuration:transitionContext];
 
-  UIView *toSnapshot = [toView snapshotViewAfterScreenUpdates:YES];
-  toSnapshot.layer.opacity = 0;
-  cell.contentView.clipsToBounds = YES;
-  [cell.contentView addSubview:toSnapshot];
+  if (fromVC == self) {
+    UIView *toSnapshot = [toView snapshotViewAfterScreenUpdates:YES];
+    toSnapshot.layer.opacity = 0;
 
-  [UIView animateWithDuration:[self transitionDuration:transitionContext] delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-    self.tableView.contentOffset = cell.frame.origin;
+    self.selectedIndexPath = [self.tableView indexPathForSelectedRow];
+    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:self.selectedIndexPath];
+    cell.contentView.clipsToBounds = YES;
 
-    toSnapshot.layer.opacity = 1;
+    [cell.contentView addSubview:toSnapshot];
 
-    [self.tableView beginUpdates];
-    [self.tableView endUpdates];
-  } completion:^(BOOL finished) {
+    [UIView animateWithDuration:duration delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+      toSnapshot.layer.opacity = 1;
+      self.tableView.contentOffset = cell.frame.origin;
+      [self.tableView beginUpdates]; [self.tableView endUpdates];
+    } completion:^(BOOL finished) {
+      toView.frame = [transitionContext finalFrameForViewController:toVC];
+      [containerView addSubview:toView];
+      [transitionContext completeTransition:YES];
+      // clean up
+      self.selectedIndexPath = nil;
+      [toSnapshot removeFromSuperview];
+    }];
+  } else {
+    // setup table
+    NSIndexPath *indexPath = self.selectedIndexPath = [fromVC valueForKey:@"indexPath"];
+    [self.tableView reloadData];
+    [self.tableView scrollToRowAtIndexPath:self.selectedIndexPath atScrollPosition:UITableViewScrollPositionTop animated:NO];
 
-    self.animatingIndexPath = nil;
-
-    [toSnapshot removeFromSuperview];
-
-    toView.frame = [transitionContext finalFrameForViewController:toVC];
     [containerView addSubview:toView];
 
-    [transitionContext completeTransition:YES];
-  }];
+    self.selectedIndexPath = nil;
+    [UIView animateWithDuration:duration delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+      [self.tableView beginUpdates]; [self.tableView endUpdates];
+      [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:NO];
+    } completion:^(BOOL finished) {
+      [transitionContext completeTransition:YES];
+    }];
+  }
 }
 
 - (NSTimeInterval)transitionDuration:(id<UIViewControllerContextTransitioning>)transitionContext
@@ -70,47 +87,35 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  if ([indexPath isEqual:self.animatingIndexPath])
-    return self.tableView.bounds.size.height + self.tableView.bounds.origin.y;
-
-  return 44;
+  if ([indexPath isEqual:self.selectedIndexPath])
+    return self.tableView.bounds.size.height;
+  else
+    return 88;
 }
-
-#pragma mark - Table
 
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+
   self.navigationItem.leftBarButtonItem = self.editButtonItem;
-
-  UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
-  self.navigationItem.rightBarButtonItem = addButton;
-
   self.navigationController.delegate = self;
 }
 
-- (void)insertNewObject:(id)sender
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-  NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
-  NSEntityDescription *entity = [[self.fetchedResultsController fetchRequest] entity];
-  NSManagedObject *newManagedObject = [NSEntityDescription insertNewObjectForEntityForName:[entity name] inManagedObjectContext:context];
-
-  // If appropriate, configure the new managed object.
-  // Normally you should use accessor methods, but using KVC here avoids the need to add a custom class to the template.
-  [newManagedObject setValue:[NSDate date] forKey:@"timeStamp"];
-
-  // Save the context.
-  NSError *error = nil;
-  if (![context save:&error]) {
-    // Replace this implementation with code to handle the error appropriately.
-    // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-    NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-    abort();
-  }
+  [segue.destinationViewController setFetchedResultsController:self.fetchedResultsController];
+  [segue.destinationViewController setIndexPath:[self.tableView indexPathForCell:sender]];
 }
 
-#pragma mark - Table View
+- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
+{
+  NSManagedObject *object = [self.fetchedResultsController objectAtIndexPath:indexPath];
+  [UIView performWithoutAnimation:^{
+    cell.backgroundColor = [UIColor colorWithHue:[[object valueForKey:@"hue"] floatValue] saturation:1 brightness:1 alpha:1];
+  }];
+}
+
+#pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -158,50 +163,33 @@
   return NO;
 }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+#pragma mark - Actions
+
+- (void)insertNewObject:(id)sender
 {
-  if ([[segue identifier] isEqualToString:@"showDetail"]) {
-    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-    NSManagedObject *object = [[self fetchedResultsController] objectAtIndexPath:indexPath];
-    [[segue destinationViewController] setDetailItem:object];
-  }
+  NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
+  NSEntityDescription *entity = [[self.fetchedResultsController fetchRequest] entity];
+  NSManagedObject *newManagedObject = [NSEntityDescription insertNewObjectForEntityForName:[entity name] inManagedObjectContext:context];
+
+  [newManagedObject setValue:@((double)arc4random()/0x100000000) forKey:@"hue"];
+  [context save:nil];
 }
 
 #pragma mark - Fetched results controller
 
 - (NSFetchedResultsController *)fetchedResultsController
 {
-  if (_fetchedResultsController != nil) {
-    return _fetchedResultsController;
+  if (!_fetchedResultsController) {
+    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Event"];
+    fetchRequest.sortDescriptors = @[ [NSSortDescriptor sortDescriptorWithKey:@"hue" ascending:YES] ];
+
+    // Edit the section name key path and cache name if appropriate.
+    // nil for section name key path means "no sections".
+    _fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:@"Event"];
+    _fetchedResultsController.delegate = self;
+
+    [_fetchedResultsController performFetch:nil];
   }
-
-  NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-  // Edit the entity name as appropriate.
-  NSEntityDescription *entity = [NSEntityDescription entityForName:@"Event" inManagedObjectContext:self.managedObjectContext];
-  [fetchRequest setEntity:entity];
-
-  // Set the batch size to a suitable number.
-  [fetchRequest setFetchBatchSize:20];
-
-  // Edit the sort key as appropriate.
-  NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"timeStamp" ascending:NO];
-  NSArray *sortDescriptors = @[sortDescriptor];
-
-  [fetchRequest setSortDescriptors:sortDescriptors];
-
-  // Edit the section name key path and cache name if appropriate.
-  // nil for section name key path means "no sections".
-  NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:@"Master"];
-  aFetchedResultsController.delegate = self;
-  self.fetchedResultsController = aFetchedResultsController;
-
-	NSError *error = nil;
-	if (![self.fetchedResultsController performFetch:&error]) {
-    // Replace this implementation with code to handle the error appropriately.
-    // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-    NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-    abort();
-	}
 
   return _fetchedResultsController;
 }
@@ -254,22 +242,6 @@
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
   [self.tableView endUpdates];
-}
-
-/*
- // Implementing the above methods to update the table view in response to individual changes may have performance implications if a large number of changes are made simultaneously. If this proves to be an issue, you can instead just implement controllerDidChangeContent: which notifies the delegate that all section and object changes have been processed.
-
- - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
- {
- // In the simplest, most efficient, case, reload the table view.
- [self.tableView reloadData];
- }
- */
-
-- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
-{
-  NSManagedObject *object = [self.fetchedResultsController objectAtIndexPath:indexPath];
-  cell.textLabel.text = [[object valueForKey:@"timeStamp"] description];
 }
 
 @end

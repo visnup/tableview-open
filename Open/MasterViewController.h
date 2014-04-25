@@ -12,7 +12,6 @@
 
 @interface MasterViewController : UITableViewController <NSFetchedResultsControllerDelegate, UINavigationControllerDelegate, UIViewControllerAnimatedTransitioning>
 
-@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 
 @end
