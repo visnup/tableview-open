@@ -126,13 +126,12 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-  id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections][section];
-  return [sectionInfo numberOfObjects];
+  return [[self.fetchedResultsController sections][section] numberOfObjects];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
   [self configureCell:cell atIndexPath:indexPath];
   return cell;
 }
