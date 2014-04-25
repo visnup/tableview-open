@@ -20,6 +20,7 @@
 		852483C1190993F200E6D02D /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 852483C0190993F200E6D02D /* DetailViewController.m */; };
 		852483C3190993F200E6D02D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 852483C2190993F200E6D02D /* Images.xcassets */; };
 		852483E21909D9A000E6D02D /* PageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 852483E11909D9A000E6D02D /* PageViewController.m */; };
+		85DB3147190A5AED001CFD6B /* CollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85DB3146190A5AED001CFD6B /* CollectionViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,8 @@
 		852483C9190993F200E6D02D /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		852483E01909D9A000E6D02D /* PageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PageViewController.h; sourceTree = "<group>"; };
 		852483E11909D9A000E6D02D /* PageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PageViewController.m; sourceTree = "<group>"; };
+		85DB3145190A5AED001CFD6B /* CollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionViewController.h; sourceTree = "<group>"; };
+		85DB3146190A5AED001CFD6B /* CollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +101,8 @@
 				852483B6190993F200E6D02D /* Main.storyboard */,
 				852483BC190993F200E6D02D /* MasterViewController.h */,
 				852483BD190993F200E6D02D /* MasterViewController.m */,
+				85DB3145190A5AED001CFD6B /* CollectionViewController.h */,
+				85DB3146190A5AED001CFD6B /* CollectionViewController.m */,
 				852483E01909D9A000E6D02D /* PageViewController.h */,
 				852483E11909D9A000E6D02D /* PageViewController.m */,
 				852483BF190993F200E6D02D /* DetailViewController.h */,
@@ -191,6 +196,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				852483C1190993F200E6D02D /* DetailViewController.m in Sources */,
+				85DB3147190A5AED001CFD6B /* CollectionViewController.m in Sources */,
 				852483BE190993F200E6D02D /* MasterViewController.m in Sources */,
 				852483B5190993F200E6D02D /* AppDelegate.m in Sources */,
 				852483B1190993F200E6D02D /* main.m in Sources */,
