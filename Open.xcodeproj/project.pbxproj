@@ -19,24 +19,8 @@
 		852483BE190993F200E6D02D /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 852483BD190993F200E6D02D /* MasterViewController.m */; };
 		852483C1190993F200E6D02D /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 852483C0190993F200E6D02D /* DetailViewController.m */; };
 		852483C3190993F200E6D02D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 852483C2190993F200E6D02D /* Images.xcassets */; };
-		852483CA190993F200E6D02D /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 852483C9190993F200E6D02D /* XCTest.framework */; };
-		852483CB190993F200E6D02D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 852483A2190993F200E6D02D /* Foundation.framework */; };
-		852483CC190993F200E6D02D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 852483A6190993F200E6D02D /* UIKit.framework */; };
-		852483CD190993F200E6D02D /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 852483A8190993F200E6D02D /* CoreData.framework */; };
-		852483D5190993F200E6D02D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 852483D3190993F200E6D02D /* InfoPlist.strings */; };
-		852483D7190993F200E6D02D /* OpenTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 852483D6190993F200E6D02D /* OpenTests.m */; };
 		852483E21909D9A000E6D02D /* PageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 852483E11909D9A000E6D02D /* PageViewController.m */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		852483CE190993F200E6D02D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 85248397190993F200E6D02D /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 8524839E190993F200E6D02D;
-			remoteInfo = Open;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		8524839F190993F200E6D02D /* Open.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Open.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -57,11 +41,7 @@
 		852483BF190993F200E6D02D /* DetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		852483C0190993F200E6D02D /* DetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		852483C2190993F200E6D02D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		852483C8190993F200E6D02D /* OpenTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OpenTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		852483C9190993F200E6D02D /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		852483D2190993F200E6D02D /* OpenTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "OpenTests-Info.plist"; sourceTree = "<group>"; };
-		852483D4190993F200E6D02D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		852483D6190993F200E6D02D /* OpenTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OpenTests.m; sourceTree = "<group>"; };
 		852483E01909D9A000E6D02D /* PageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PageViewController.h; sourceTree = "<group>"; };
 		852483E11909D9A000E6D02D /* PageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PageViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -78,17 +58,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		852483C5190993F200E6D02D /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				852483CA190993F200E6D02D /* XCTest.framework in Frameworks */,
-				852483CD190993F200E6D02D /* CoreData.framework in Frameworks */,
-				852483CC190993F200E6D02D /* UIKit.framework in Frameworks */,
-				852483CB190993F200E6D02D /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -96,7 +65,6 @@
 			isa = PBXGroup;
 			children = (
 				852483AA190993F200E6D02D /* Open */,
-				852483D0190993F200E6D02D /* OpenTests */,
 				852483A1190993F200E6D02D /* Frameworks */,
 				852483A0190993F200E6D02D /* Products */,
 			);
@@ -106,7 +74,6 @@
 			isa = PBXGroup;
 			children = (
 				8524839F190993F200E6D02D /* Open.app */,
-				852483C8190993F200E6D02D /* OpenTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -153,24 +120,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		852483D0190993F200E6D02D /* OpenTests */ = {
-			isa = PBXGroup;
-			children = (
-				852483D6190993F200E6D02D /* OpenTests.m */,
-				852483D1190993F200E6D02D /* Supporting Files */,
-			);
-			path = OpenTests;
-			sourceTree = "<group>";
-		};
-		852483D1190993F200E6D02D /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				852483D2190993F200E6D02D /* OpenTests-Info.plist */,
-				852483D3190993F200E6D02D /* InfoPlist.strings */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -191,24 +140,6 @@
 			productReference = 8524839F190993F200E6D02D /* Open.app */;
 			productType = "com.apple.product-type.application";
 		};
-		852483C7190993F200E6D02D /* OpenTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 852483DD190993F200E6D02D /* Build configuration list for PBXNativeTarget "OpenTests" */;
-			buildPhases = (
-				852483C4190993F200E6D02D /* Sources */,
-				852483C5190993F200E6D02D /* Frameworks */,
-				852483C6190993F200E6D02D /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				852483CF190993F200E6D02D /* PBXTargetDependency */,
-			);
-			name = OpenTests;
-			productName = OpenTests;
-			productReference = 852483C8190993F200E6D02D /* OpenTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -220,9 +151,6 @@
 				TargetAttributes = {
 					8524839E190993F200E6D02D = {
 						DevelopmentTeam = 2GR4447TCG;
-					};
-					852483C7190993F200E6D02D = {
-						TestTargetID = 8524839E190993F200E6D02D;
 					};
 				};
 			};
@@ -240,7 +168,6 @@
 			projectRoot = "";
 			targets = (
 				8524839E190993F200E6D02D /* Open */,
-				852483C7190993F200E6D02D /* OpenTests */,
 			);
 		};
 /* End PBXProject section */
@@ -253,14 +180,6 @@
 				852483C3190993F200E6D02D /* Images.xcassets in Resources */,
 				852483AF190993F200E6D02D /* InfoPlist.strings in Resources */,
 				852483B8190993F200E6D02D /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		852483C6190993F200E6D02D /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				852483D5190993F200E6D02D /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -280,23 +199,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		852483C4190993F200E6D02D /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				852483D7190993F200E6D02D /* OpenTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		852483CF190993F200E6D02D /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 8524839E190993F200E6D02D /* Open */;
-			targetProxy = 852483CE190993F200E6D02D /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		852483AD190993F200E6D02D /* InfoPlist.strings */ = {
@@ -313,14 +216,6 @@
 				852483B7190993F200E6D02D /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		852483D3190993F200E6D02D /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				852483D4190993F200E6D02D /* en */,
-			);
-			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -428,46 +323,6 @@
 			};
 			name = Release;
 		};
-		852483DE190993F200E6D02D /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Open.app/Open";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Open/Open-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "OpenTests/OpenTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Debug;
-		};
-		852483DF190993F200E6D02D /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Open.app/Open";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Open/Open-Prefix.pch";
-				INFOPLIST_FILE = "OpenTests/OpenTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -487,14 +342,7 @@
 				852483DC190993F200E6D02D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-		};
-		852483DD190993F200E6D02D /* Build configuration list for PBXNativeTarget "OpenTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				852483DE190993F200E6D02D /* Debug */,
-				852483DF190993F200E6D02D /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
