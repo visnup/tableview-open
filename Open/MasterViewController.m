@@ -21,11 +21,33 @@
 
 @implementation MasterViewController
 
+- (void)viewDidLoad
+{
+  [super viewDidLoad];
+
+  self.navigationItem.leftBarButtonItem = self.editButtonItem;
+  self.navigationController.delegate = self;
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+  [segue.destinationViewController setFetchedResultsController:self.fetchedResultsController];
+  [segue.destinationViewController setIndexPath:[self.tableView indexPathForCell:sender]];
+}
+
+- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
+{
+  NSManagedObject *object = [self.fetchedResultsController objectAtIndexPath:indexPath];
+  [UIView performWithoutAnimation:^{
+    cell.backgroundColor = [UIColor colorWithHue:[[object valueForKey:@"hue"] floatValue] saturation:1 brightness:1 alpha:1];
+  }];
+}
+
 #pragma mark - UINavigationControllerDelegate
 
 - (id<UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController animationControllerForOperation:(UINavigationControllerOperation)operation fromViewController:(UIViewController *)fromVC toViewController:(UIViewController *)toVC
 {
-  return self;
+  return (fromVC == self || toVC == self) ? self : nil;
 }
 
 #pragma mark - UIViewControllerAnimatedTransitioning
@@ -85,34 +107,14 @@
   return 0.4;
 }
 
+#pragma mark - UITableViewDelegate
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
   if ([indexPath isEqual:self.selectedIndexPath])
     return self.tableView.bounds.size.height;
   else
     return 88;
-}
-
-- (void)viewDidLoad
-{
-  [super viewDidLoad];
-
-  self.navigationItem.leftBarButtonItem = self.editButtonItem;
-  self.navigationController.delegate = self;
-}
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-  [segue.destinationViewController setFetchedResultsController:self.fetchedResultsController];
-  [segue.destinationViewController setIndexPath:[self.tableView indexPathForCell:sender]];
-}
-
-- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
-{
-  NSManagedObject *object = [self.fetchedResultsController objectAtIndexPath:indexPath];
-  [UIView performWithoutAnimation:^{
-    cell.backgroundColor = [UIColor colorWithHue:[[object valueForKey:@"hue"] floatValue] saturation:1 brightness:1 alpha:1];
-  }];
 }
 
 #pragma mark - UITableViewDataSource
