@@ -11,6 +11,8 @@
 
 @interface MasterViewController ()
 
+@property (weak, nonatomic) IBOutlet UIView *footerView;
+
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 
 @property NSIndexPath *selectedIndexPath;
@@ -27,6 +29,10 @@
 
   self.navigationItem.leftBarButtonItem = self.editButtonItem;
   self.navigationController.delegate = self;
+
+  CGRect bounds = self.footerView.bounds;
+  bounds.size.height = self.tableView.bounds.size.height - 88 - 64;
+  self.footerView.bounds = bounds;
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
